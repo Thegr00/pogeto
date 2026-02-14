@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dsad71jw5pjb1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fliwn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uuf1f"]
+
+[node name="Mangas" type="CharacterBody3D" unique_id=1665194600]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2056232767]
+mesh = SubResource("CapsuleMesh_fliwn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=329601559]
+shape = SubResource("CapsuleShape3D_uuf1f")
+
+[node name="neck" type="Node3D" parent="." unique_id=862621693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60094714, 0)
+
+[node name="Camera3D" type="Camera3D" parent="neck" unique_id=2066725471]
