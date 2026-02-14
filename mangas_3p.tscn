@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://co5w5k0vu1wm5"]
+
+[ext_resource type="Script" uid="uid://du2kqcpk57x4h" path="res://mangas_3p.gd" id="1_yn4l2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yn4l2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qay7o"]
+
+[node name="mangas3p" type="CharacterBody3D" unique_id=1479076587]
+script = ExtResource("1_yn4l2")
+max_speed = 50.0
+min_speed = 10.0
+dive_acceleration = 25.0
+slerp_speed = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=978584415]
+mesh = SubResource("SphereMesh_yn4l2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1325422564]
+shape = SubResource("SphereShape3D_qay7o")
+
+[node name="cam origin" type="Node3D" parent="." unique_id=1068079872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5927516, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="cam origin" unique_id=811305788]
+
+[node name="CABECA" type="Camera3D" parent="cam origin" unique_id=671887996]
+transform = Transform3D(1, 0, 0, 0, 0.93459, 0.35572687, 0, -0.35572687, 0.93459, 0, 1.4461149, 3.0635102)
+fov = 82.3
