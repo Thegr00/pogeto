@@ -16,6 +16,9 @@ const JUMP_VELOCITY = 4.5
 @onready var spring_arm = $"cam origin"/SpringArm3D
 @export var sens = 0.5	
 
+@onready var wind_particles = $"cam origin/Particulas"
+#adicionar audio *****
+
 var current_speed = 10.0
 #MOUSE
 func _ready():
@@ -48,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	if current_speed < min_speed + 2: #SE POUCA VELOCIDADE CAIS UMA BECA (GRAVIDADE)
 		velocity += get_gravity() * delta
 func handle_flight_rotation(delta):
-	var pitch = Input.get_axis("back", "foward")     #VARIAVEL DE MOVIEMENTO CIMA-BAIXO (-1 A 1)
+	var pitch = Input.get_axis("back", "forward")     #VARIAVEL DE MOVIEMENTO CIMA-BAIXO (-1 A 1)
 	var roll = Input.get_axis("right", "left")       #IGUAL SOQ LADOS
 	rotate_object_local(Vector3.RIGHT, pitch * rotation_speed * delta)   #RODA DE ACORDO COM VALORES/PRESSES
 	rotate_object_local(Vector3.FORWARD, roll * rotation_speed * delta)  #NOTA: DELTA= MANTEM A SPEED BOA INDEEPENDENTE DE FPS 
@@ -78,13 +81,9 @@ func update_camera_effects(delta): #CAMERA TIPO SUPERFLIGHT
 	camera.fov = lerp(camera.fov, target_fov, delta * 2.0)  #FAZ COM Q O VALOR NAO MUDE BRUSCAMENTEe
 	var subtle_tilt = -rotation.z * 0.2 
 	camera.rotation.z = lerp_angle(camera.rotation.z, subtle_tilt, delta * 5.0)
-	
-#MOVE
-	#var input_dir := Input.get_vector("left", "right", "foward", "back")
-	#var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	#if direction:
-		#velocity.x = direction.x * SPEED
-		#velocity.z = direction.z * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-		#velocity.z = move_toward(velocity.z, 0, SPEED)
+	var _speed_ratio = (current_speed - min_speed) / (max_speed - min_speed) 
+	if _speed_ratio > 0.5:
+		wind_particles.emitting = true
+		wind_particles.amount_ratio = clamp(_speed_ratio, 0.0, 1.0)
+	else:
+		wind_particles.emitting = false    

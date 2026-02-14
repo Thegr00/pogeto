@@ -6,6 +6,20 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qay7o"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yn4l2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qay7o"]
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5k7j1"]
+material = SubResource("StandardMaterial3D_qay7o")
+
+[sub_resource type="QuadMesh" id="QuadMesh_o2qoc"]
+size = Vector2(0, 0)
+
 [node name="mangas3p" type="CharacterBody3D" unique_id=1479076587]
 script = ExtResource("1_yn4l2")
 max_speed = 50.0
@@ -27,3 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5927516, 0)
 [node name="CABECA" type="Camera3D" parent="cam origin" unique_id=671887996]
 transform = Transform3D(1, 0, 0, 0, 0.93459, 0.35572687, 0, -0.35572687, 0.93459, 0, 1.4461149, 3.0635102)
 fov = 82.3
+
+[node name="Particulas" type="GPUParticles3D" parent="cam origin" unique_id=1533343449]
+process_material = SubResource("ParticleProcessMaterial_yn4l2")
+draw_pass_1 = SubResource("QuadMesh_5k7j1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="cam origin/Particulas" unique_id=1738539474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7281227, 0)
+mesh = SubResource("QuadMesh_o2qoc")
