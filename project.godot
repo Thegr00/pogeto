@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="API"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 quit={

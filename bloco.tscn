@@ -1,13 +1,18 @@
 [gd_scene format=3 uid="uid://cqdrbah844p4k"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_l6d1b"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l6d1b"]
+height = 50.0
+radius = 7.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_247xi"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_247xi"]
+top_radius = 7.0
+bottom_radius = 7.0
+height = 50.0
 
 [node name="bloco" type="RigidBody3D" unique_id=1796297952]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1436984701]
-shape = SubResource("BoxShape3D_l6d1b")
+shape = SubResource("CylinderShape3D_l6d1b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1081605222]
-mesh = SubResource("BoxMesh_247xi")
+mesh = SubResource("CylinderMesh_247xi")

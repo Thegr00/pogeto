@@ -4,39 +4,34 @@
 [ext_resource type="PackedScene" uid="uid://bpdawtkeeoa4b" path="res://chao.tscn" id="4_h40as"]
 [ext_resource type="Texture2D" uid="uid://dig353s5yy38x" path="res://icon.svg" id="4_iyngw"]
 [ext_resource type="PackedScene" uid="uid://cqdrbah844p4k" path="res://bloco.tscn" id="5_fljrr"]
-[ext_resource type="PackedScene" uid="uid://ccesadhil5fjb" path="res://arvore __.blend" id="5_h40as"]
 
 [node name="prototipo" type="Node3D" unique_id=567095719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.536743e-07, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1684775498]
-transform = Transform3D(1, 0, 0, 0, 0.015166374, 0.999885, 0, -0.999885, 0.015166374, -0.22037363, 126.80767, 0.7445842)
+transform = Transform3D(1, 0, 0, 0, 0.015166374, 0.999885, 0, -0.999885, 0.015166374, -0.22037363, 237.43213, 0.7445842)
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=228037252]
 transform = Transform3D(0.08588647, 0, -0.9963049, 0, 1, 0, 0.9963049, 0, 0.08588647, -4.179966, 5.4473896, 0)
 texture = ExtResource("4_iyngw")
 
 [node name="bloco" parent="." unique_id=1796297952 instance=ExtResource("5_fljrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6878176, 11.862857, 15.043909)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.93145, 0)
 
-[node name="bloco2" parent="." unique_id=1058038430 instance=ExtResource("5_fljrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8661394, 2.746626, 5.144436)
+[node name="bloco" parent="bloco" unique_id=119525883 instance=ExtResource("5_fljrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.89408, 1.0448837, 0)
+
+[node name="bloco2" parent="bloco" unique_id=364865707 instance=ExtResource("5_fljrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -140.98105, 2.0897675, 0)
+
+[node name="bloco3" parent="bloco" unique_id=2064001394 instance=ExtResource("5_fljrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -194.88396, 2.0897675, 0)
 
 [node name="mangas3p" parent="." unique_id=1479076587 instance=ExtResource("4_fljrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4574757, 0)
+transform = Transform3D(0.23065597, -0.5287738, 0.81682074, 0.0456251, 0.8444104, 0.5337505, -0.97196513, -0.08584521, 0.21889368, 69.6704, 66.08311, 0)
+min_speed = 5.0
 
 [node name="Chao" parent="." unique_id=1843973378 instance=ExtResource("4_h40as")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -227.82504, 0, 0)
 
 [node name="arvores" type="Node3D" parent="." unique_id=248557432]
-
-[node name="arvore __4" parent="arvores" unique_id=50036578 instance=ExtResource("5_h40as")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.84063, 0.5930233, -6.9263268)
-
-[node name="arvore __" parent="arvores" unique_id=1530840434 instance=ExtResource("5_h40as")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.440739, 0.92044353, -22.426552)
-
-[node name="arvore __2" parent="arvores" unique_id=1479553767 instance=ExtResource("5_h40as")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.939145, 0.89108944, 29.46627)
-
-[node name="arvore __3" parent="arvores" unique_id=542202890 instance=ExtResource("5_h40as")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.364236, 0.59177876, -29.352879)
