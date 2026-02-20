@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bpdawtkeeoa4b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dpbk"]
-size = Vector3(100, 0.5, 100)
+size = Vector3(500, 0.5, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ra3m2"]
-size = Vector3(100, 0.5, 100)
+size = Vector3(500, 0.5, 100)
 
 [node name="Chao" type="StaticBody3D" unique_id=1843973378]
 metadata/_edit_group_ = true
