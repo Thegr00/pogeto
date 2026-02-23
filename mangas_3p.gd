@@ -31,10 +31,15 @@ func _input(event):
 		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
 		pivot.rotation.z = 0 #pa camera nao mexer no eixo dos z 
 		rotation.z = clamp(rotation.z, deg_to_rad(-45), deg_to_rad(45))
+#PAUSA
+func toggle_pause():
+	var new_pause_state = not get_tree().paused
+	get_tree().paused = new_pause_state
+	visible = new_pause_state
 func _physics_process(delta: float) -> void:
-#SAIR
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit() 
+	if Input.is_action_just_pressed("pause"):
+		get_tree().change_scene_to_file("res://pause_menu.tscn")
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 #VOAR
 	handle_flight_rotation(delta)
 	calculate_flight_speed(delta)

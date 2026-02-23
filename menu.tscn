@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://0hurgaev351i"]
+
+[ext_resource type="Texture2D" uid="uid://dagq83ml1cngb" path="res://Screenshot 2024-09-03 015442.png" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://chuj3xtsxt8l3" path="res://menu.gd" id="1_mae5d"]
+[ext_resource type="FontFile" uid="uid://4amfjmw5unq5" path="res://First Bunny.otf" id="2_ouk20"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ouk20"]
+texture = ExtResource("1_lti8b")
+modulate_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsb4k"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ouk20"]
+bg_color = Color(0.20942885, 0.2094289, 0.20942876, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mae5d"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ouk20"]
+
+[node name="Menu" type="Control" unique_id=1804978431]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mae5d")
+
+[node name="Panel" type="Panel" parent="." unique_id=44581063]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ouk20")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=859394619]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.25
+offset_top = -99.5
+offset_right = 128.25
+offset_bottom = 99.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+
+[node name="Start" type="Button" parent="VBoxContainer" unique_id=1758288110]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_vsb4k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ouk20")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mae5d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ouk20")
+text = "Start"
+
+[node name="Opt" type="Button" parent="VBoxContainer" unique_id=48809587]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_vsb4k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ouk20")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mae5d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ouk20")
+text = "Settings"
+
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1953016172]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_vsb4k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ouk20")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mae5d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ouk20")
+text = "Exit"
+
+[node name="Label" type="Label" parent="." unique_id=1340948196]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.5
+offset_top = -272.0
+offset_right = 214.0
+offset_bottom = -136.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 20
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_ouk20")
+theme_override_font_sizes/font_size = 100
+text = "VIDA DE CAIPIRA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Opt" to="." method="_on_opt_pressed"]
+[connection signal="pressed" from="VBoxContainer/Opt" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
