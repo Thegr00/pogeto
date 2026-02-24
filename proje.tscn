@@ -3,7 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://co5w5k0vu1wm5" path="res://mangas_3p.tscn" id="4_fljrr"]
 [ext_resource type="PackedScene" uid="uid://bpdawtkeeoa4b" path="res://chao.tscn" id="4_h40as"]
 [ext_resource type="Texture2D" uid="uid://dig353s5yy38x" path="res://icon.svg" id="4_iyngw"]
-[ext_resource type="PackedScene" uid="uid://cqdrbah844p4k" path="res://bloco.tscn" id="5_fljrr"]
+[ext_resource type="Texture2D" uid="uid://bql43784bl32e" path="res://kenney_prototype-textures/PNG/Purple/texture_05.png" id="4_kcjrf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eekm5"]
+albedo_texture = ExtResource("4_kcjrf")
 
 [node name="prototipo" type="Node3D" unique_id=567095719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.536743e-07, 0)
@@ -15,23 +18,31 @@ transform = Transform3D(1, 0, 0, 0, 0.015166374, 0.999885, 0, -0.999885, 0.01516
 transform = Transform3D(0.08588647, 0, -0.9963049, 0, 1, 0, 0.9963049, 0, 0.08588647, -4.179966, 5.4473896, 0)
 texture = ExtResource("4_iyngw")
 
-[node name="bloco" parent="." unique_id=1796297952 instance=ExtResource("5_fljrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.93145, 0)
-
-[node name="bloco" parent="bloco" unique_id=119525883 instance=ExtResource("5_fljrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.89408, 1.0448837, 0)
-
-[node name="bloco2" parent="bloco" unique_id=364865707 instance=ExtResource("5_fljrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -140.98105, 2.0897675, 0)
-
-[node name="bloco3" parent="bloco" unique_id=2064001394 instance=ExtResource("5_fljrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -194.88396, 2.0897675, 0)
-
 [node name="mangas3p" parent="." unique_id=1479076587 instance=ExtResource("4_fljrr")]
-transform = Transform3D(0.23065597, -0.5287738, 0.81682074, 0.0456251, 0.8444104, 0.5337505, -0.97196513, -0.08584521, 0.21889368, 69.6704, 66.08311, 0)
-min_speed = 5.0
+transform = Transform3D(0.04838573, -0.99840117, 0.02922595, 0.028883105, 0.030646624, 0.99911284, -0.99841076, -0.047498662, 0.030319784, 6.8473883, 93.93289, -2.2547288)
+max_speed = 40.0
+dive_acceleration = 22.0
 
 [node name="Chao" parent="." unique_id=1843973378 instance=ExtResource("4_h40as")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -227.82504, 0, 0)
 
 [node name="arvores" type="Node3D" parent="." unique_id=248557432]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=7744264]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=417731587]
+transform = Transform3D(0.9482738, 0.31745362, 0, -0.31745362, 0.9482738, 0, 0, 0, 1, -25.324903, 21.40607, -3.7799034)
+size = Vector3(43.64822, 126.89612, 38.246094)
+material = SubResource("StandardMaterial3D_eekm5")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D" unique_id=662066019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35564804, 3.615429, -0.30915308)
+operation = 2
+radius = 18.121094
+height = 195.41046
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=241108429]
+transform = Transform3D(1.0000011, 2.9802322e-07, 0, -2.9802322e-07, 1.0000011, 0, 0, 0, 1, -14.662872, -1.9681444, 1.1003942)
+operation = 2
+size = Vector3(24.729431, 16.676628, 17.55531)
