@@ -3,9 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dagq83ml1cngb" path="res://Screenshot 2024-09-03 015442.png" id="1_lti8b"]
 [ext_resource type="Script" uid="uid://chuj3xtsxt8l3" path="res://menu.gd" id="1_mae5d"]
 [ext_resource type="FontFile" uid="uid://4amfjmw5unq5" path="res://First Bunny.otf" id="2_ouk20"]
-[ext_resource type="AudioStream" path="res://Sam the Kid - Frio [NRyEwTc0uhE].mp3" id="4_4hy44"]
-[ext_resource type="Script" path="res://audio_control.gd" id="5_ytr4m"]
-[ext_resource type="Script" path="res://fullscreen_control.gd" id="6_l48gv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ouk20"]
 texture = ExtResource("1_lti8b")
@@ -137,9 +134,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=53885676]
-stream = ExtResource("4_4hy44")
 autoplay = true
-bus = &"Music"
 
 [node name="Settings" type="Panel" parent="." unique_id=703174346]
 layout_mode = 1
@@ -195,17 +190,14 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ytr4m")
 max_value = 1.0
 step = 0.05
 value = 1.0
-script = ExtResource("5_ytr4m")
-audio_bus_name = "Music"
 
-[node name="FullscreenContro" type="CheckButton" parent="Settings" unique_id=286246803]
+[node name="FullscreenControl" type="CheckButton" parent="Settings" unique_id=286246803]
 layout_mode = 0
 offset_left = 9.25
 offset_top = 82.75
 offset_right = 307.25
 offset_bottom = 122.75
 text = "Fullscreen"
-script = ExtResource("6_l48gv")
 
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainButtons/Opt" to="." method="_on_opt_pressed"]
@@ -213,4 +205,4 @@ script = ExtResource("6_l48gv")
 [connection signal="pressed" from="MainButtons/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Settings/Label/Back" to="." method="_on_back_sett_pressed"]
 [connection signal="value_changed" from="Settings/AudioControl" to="Settings/AudioControl" method="_on_value_changed"]
-[connection signal="toggled" from="Settings/FullscreenContro" to="Settings/FullscreenContro" method="_on_toggled"]
+[connection signal="toggled" from="Settings/FullscreenControl" to="Settings/FullscreenControl" method="_on_toggled"]
