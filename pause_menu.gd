@@ -8,3 +8,7 @@ func _on_options_pressed() -> void:
 
 func _on_exit_to_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://menu.tscn") 
+
+
+func _on_restart_pressed() -> void:
+	get_tree().change_scene_to_file("res://proje.tscn") 

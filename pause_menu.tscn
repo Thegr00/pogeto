@@ -82,6 +82,20 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_p81d2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2nc7s")
 text = "Settings"
 
+[node name="Restart" type="Button" parent="VBoxContainer" unique_id=1257779632]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_nwcfo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_05uyy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_p81d2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2nc7s")
+text = "Restart Level
+"
+
 [node name="Exit to menu" type="Button" parent="VBoxContainer" unique_id=861567255]
 layout_mode = 2
 size_flags_vertical = 3
@@ -97,4 +111,5 @@ text = "Exit to menu"
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit to menu" to="." method="_on_exit_to_menu_pressed"]
