@@ -207,8 +207,8 @@ text = "Fullscreen"
 script = ExtResource("6_l48gv")
 
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MainButtons/Opt" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MainButtons/Opt" to="." method="_on_opt_pressed"]
+[connection signal="pressed" from="MainButtons/Opt" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MainButtons/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Settings/Label/Back" to="." method="_on_back_sett_pressed"]
 [connection signal="value_changed" from="Settings/AudioControl" to="Settings/AudioControl" method="_on_value_changed"]

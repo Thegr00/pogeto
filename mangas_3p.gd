@@ -12,11 +12,14 @@ const JUMP_VELOCITY = 4.5
 
 @export_group("Camera")
 @onready var pivot = $"cam origin"
-@onready var camera = $"cam origin"/CABECA
+@onready var camera = $"cam origin/SpringArm3D/CABECA"
 @onready var spring_arm = $"cam origin"/SpringArm3D
 @export var sens = 0.5
+@export var cam_offset_amount = 0.5  #pa mexer a camera m passito
+@export var cam_offset_speed = 3.0
 
 @onready var wind_particles = $"cam origin/Particulas"
+@export var mesh_container: Node3D
 #adicionar audio *****
 
 var current_speed = 10.0
@@ -24,14 +27,8 @@ var current_speed = 10.0
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	spring_arm.set_as_top_level(true) #assim a camera nao ta presa ao gajo 
-func _input(event):
-	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * sens))
-		pivot.rotate_x(deg_to_rad(-event.relative.y * sens))
-		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
-		pivot.rotation.z = 0 #pa camera nao mexer no eixo dos z 
-		rotation.z = clamp(rotation.z, deg_to_rad(-45), deg_to_rad(45))
-#PAUSA
+func _input(_event):
+	pass
 func toggle_pause():
 	var new_pause_state = not get_tree().paused
 	get_tree().paused = new_pause_state
@@ -40,16 +37,13 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		get_tree().change_scene_to_file("res://pause_menu.tscn")
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		return
 #VOAR
 	handle_flight_rotation(delta)
 	calculate_flight_speed(delta)
 	move_and_slide()
 	update_camera_effects(delta)
-	update_camera_soft_follow(delta)
-	pivot.global_rotation.y = global_rotation.y
-	pivot.rotation.z = 0 
-	camera.rotation.z = 0
-	pivot.global_rotation.z = 0
+	update_camera_soft_follow(delta) 
 	var forward_dir = -global_transform.basis.z
 	var target_velocity = forward_dir * current_speed
 	velocity = velocity.lerp(target_velocity, slerp_speed * delta) #TIRA A CLUNKYNESS
@@ -57,14 +51,23 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 func handle_flight_rotation(delta):
 	var pitch = Input.get_axis("back", "forward")     #VARIAVEL DE MOVIEMENTO CIMA-BAIXO (-1 A 1)
-	var roll = Input.get_axis("right", "left")       #IGUAL SOQ LADOS
+	var roll = Input.get_axis("left", "right")     #IGUAL SOQ LADOS
 	rotate_object_local(Vector3.RIGHT, pitch * rotation_speed * delta)   #RODA DE ACORDO COM VALORES/PRESSES
-	rotate_object_local(Vector3.FORWARD, roll * rotation_speed * delta)  #NOTA: DELTA= MANTEM A SPEED BOA INDEEPENDENTE DE FPS
-	rotation.x = clamp(rotation.x, deg_to_rad(-89), deg_to_rad(89)) 
-	var turn_strength = -rotation.z    #QUANDO DIREITA VIRAS PA DIREITA MSM
-	rotate_y(turn_strength * delta * 2.0) 
+	rotate_object_local(Vector3.FORWARD, -roll * rotation_speed * delta)  #NOTA: DELTA= MANTEM A SPEED BOA INDEEPENDENTE DE FPS
+	rotation.x = clamp(rotation.x, deg_to_rad(-89), deg_to_rad(89))
+	var max_roll = deg_to_rad(90)
+	rotation.z = clamp(rotation.z, -max_roll, max_roll)
+	var bank_amount = transform.basis.x.y 
+	rotate_y(-bank_amount * delta * 3.0) 
 	if roll == 0:
-		rotation.z = lerp_angle(rotation.z, 0, delta * 2.0)  #SE PARAR DE VIRAR FICA DIREITO
+		var current_quat = transform.basis.get_rotation_quaternion()
+		var target_quat = transform.basis.orthonormalized().get_rotation_quaternion()
+		var interpolated_quat = current_quat.slerp(target_quat, delta * 1.5)
+		transform.basis = Basis(interpolated_quat)
+		rotation.z = lerp_angle(rotation.z, 0, delta * 2.0) #SE PARAR DE VIRAR FICA DIREITO
+	if mesh_container:
+		var target_tilt = -roll * deg_to_rad(20)
+		mesh_container.rotation.z = lerp_angle(mesh_container.rotation.z, target_tilt, delta * 5.0)
 func calculate_flight_speed(delta):
 	var look_dir_y = -transform.basis.z.y 
 	if look_dir_y < 0: #DIVE
@@ -75,15 +78,27 @@ func calculate_flight_speed(delta):
 	current_speed = clamp(current_speed, min_speed, max_speed)
 #CAMERA TIPO SUPERFLIGHT
 func update_camera_soft_follow(delta: float):
-	spring_arm.global_position = spring_arm.global_position.lerp(global_position, delta * 20.0)
-	var target_rotation = global_transform.basis.get_rotation_quaternion()
-	var current_rotation = spring_arm.global_transform.basis.get_rotation_quaternion()
-	var smoothed_rotation = current_rotation.slerp(target_rotation, delta * 4.0)
-	spring_arm.global_transform.basis = Basis(smoothed_rotation)
-	var target_margin = 4.0 + (current_speed * 0.05)
+	var _offset = (-global_transform.basis.z * -4.0) + (global_transform.basis.y * 1.0)
+	var back_dir = global_transform.basis.z
+	var up_dir = global_transform.basis.y
+	var target_pos = global_position + (back_dir * 1.0) + (up_dir * 1.0)
+	spring_arm.global_position = spring_arm.global_position.lerp(target_pos, delta * 8.0)
+	var target_quat = global_transform.basis.get_rotation_quaternion()
+	var current_quat = spring_arm.global_transform.basis.get_rotation_quaternion()
+	spring_arm.global_transform.basis = Basis(current_quat.slerp(target_quat, delta * 6.0))
+	var input_dir = Vector2(
+		Input.get_axis("left", "right"), 
+		Input.get_axis("forward", "back")
+	)
+	var target_cam_pos = Vector3(
+		-input_dir.x * cam_offset_amount, 
+		-input_dir.y * (cam_offset_amount * 0.5), 0
+	)
+	camera.transform.origin = camera.transform.origin.lerp(target_cam_pos, delta * cam_offset_speed)
+	var target_margin = 0.2 + (current_speed * 0.00005) 
 	spring_arm.spring_length = lerp(spring_arm.spring_length, target_margin, delta * 2.0)
 func update_camera_effects(delta): #CAMERA TIPO SUPERFLIGHT
-	var target_fov = 75.0 + (current_speed * 0.8) #MUDA O FOV COM A SPEED
+	var target_fov = 75.0 + (current_speed * 0.7) #MUDA O FOV COM A SPEED
 	camera.fov = lerp(camera.fov, target_fov, delta * 2.0)  #FAZ COM Q O VALOR NAO MUDE BRUSCAMENTEe
 	var subtle_tilt = -rotation.z * 0.2 
 	camera.rotation.z = lerp_angle(camera.rotation.z, subtle_tilt, delta * 5.0)
