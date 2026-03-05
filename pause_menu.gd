@@ -2,9 +2,9 @@ extends Control
 
 func _on_resume_pressed() -> void:
 	pass
-	pass
+	
 func _on_options_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://Settings_Menu/settings_menu.tscn")
 
 func _on_exit_to_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://menu.tscn") 
+	get_tree().change_scene_to_file("res://Main_Menu/main_menu.tscn") 
