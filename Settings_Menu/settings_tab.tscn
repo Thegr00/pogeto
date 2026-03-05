@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://c4hx8ibmetgrf"]
 
+[ext_resource type="PackedScene" uid="uid://dtt4e1datbjfe" path="res://Settings_Menu/window_mode_button.tscn" id="1_kyc7v"]
+[ext_resource type="PackedScene" uid="uid://dh78vle5t7wmq" path="res://Settings_Menu/resolution_mode_button.tscn" id="2_0fns4"]
+
 [node name="Settings_tab" type="Control" unique_id=2099272288]
 layout_mode = 3
 anchors_preset = 15
@@ -80,30 +83,18 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer" unique_id=2037000327]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Graphics/MarginContainer" unique_id=105710235]
 layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" unique_id=1499201273]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer/ScrollContainer" unique_id=1832821372]
 layout_mode = 2
-text = "12345678"
+theme_override_constants/separation = 128
 
-[node name="Label2" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" unique_id=1478705807]
+[node name="Window_Mode_Button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1423869101 instance=ExtResource("1_kyc7v")]
 layout_mode = 2
-text = "12345678"
 
-[node name="Label3" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" unique_id=1901919012]
+[node name="Resolution_Mode_Button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1224977444 instance=ExtResource("2_0fns4")]
 layout_mode = 2
-text = "12345678"
-
-[node name="Label4" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" unique_id=1652165184]
-layout_mode = 2
-text = "12345678"
-
-[node name="Label5" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" unique_id=1625212830]
-layout_mode = 2
-text = "12345678"
 
 [node name="Controls" type="TabBar" parent="TabContainer" unique_id=84577468]
 visible = false

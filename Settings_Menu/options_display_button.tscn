@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dme6mcv4srqoo"]
+
+[node name="Options_display_Button" type="Control" unique_id=1423869101]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2141055457]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 160
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1715457472]
+custom_minimum_size = Vector2(264, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Base_Label"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=1581724824]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer" unique_id=357574500]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
