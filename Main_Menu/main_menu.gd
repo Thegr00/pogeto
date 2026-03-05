@@ -1,0 +1,38 @@
+class_name MainMenu
+extends Control
+
+@onready var start_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/Start_button
+@onready var opt_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/Opt_button
+@onready var exit_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/Exit_button
+@onready var settings_menu: SettingsMenu = $Settings_menu
+@onready var margin_container: MarginContainer = $MarginContainer
+
+
+@onready var start_level = preload("res://proje.tscn") as PackedScene
+
+func _ready():
+	handle_signals()
+
+func on_start_pressed() -> void:
+	get_tree().change_scene_to_packed(start_level)
+
+func on_options_pressed() -> void:
+	margin_container.visible = false
+	settings_menu.set_process(true)
+	settings_menu.visible = true
+
+
+func on_exit_pressed() -> void:
+	get_tree().quit()
+
+func on_exit_options_menu() -> void:
+	margin_container.visible = true
+	settings_menu.visible = false
+
+
+
+func handle_signals() -> void:
+	start_button.button_down.connect(on_start_pressed)
+	opt_button.button_down.connect(on_options_pressed)
+	exit_button.button_down.connect(on_exit_pressed)
+	settings_menu.exit_options_menu.connect(on_exit_options_menu)
