@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://up8rwgpj6eq7"]
 
 [ext_resource type="Script" uid="uid://rdwfnwsfhojb" path="res://Main_Menu/main_menu.gd" id="1_jht8a"]
-[ext_resource type="Texture2D" uid="uid://dagq83ml1cngb" path="res://Screenshot 2024-09-03 015442.png" id="2_6qckm"]
+[ext_resource type="Texture2D" uid="uid://di31kll7fls0k" path="res://Welcome to the amto.jpg" id="2_6qckm"]
 [ext_resource type="PackedScene" uid="uid://xyw0fj5xlm2h" path="res://Settings_Menu/settings_menu.tscn" id="3_6qckm"]
 
+[sub_resource type="SystemFont" id="SystemFont_6qckm"]
+
 [sub_resource type="SystemFont" id="SystemFont_2jvup"]
+subpixel_positioning = 0
 
 [node name="Main_Menu" type="Control" unique_id=173472075]
 layout_mode = 3
@@ -45,8 +48,9 @@ layout_mode = 2
 
 [node name="Nome do jogo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=666131899]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_6qckm")
 theme_override_font_sizes/font_size = 64
-text = "Vida de Caipara"
+text = "Vida de Caipira"
 horizontal_alignment = 1
 vertical_alignment = 1
 
