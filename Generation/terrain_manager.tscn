@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bvfpr8hsgsqrg"]
+
+[ext_resource type="Script" uid="uid://1nloobvtrtnk" path="res://Generation/scripts/terrain_manager.gd" id="1_icbd1"]
+[ext_resource type="PackedScene" uid="uid://co5w5k0vu1wm5" path="res://mangas_3p.tscn" id="2_atpbs"]
+
+[sub_resource type="Environment" id="Environment_atpbs"]
+fog_enabled = true
+fog_light_color = Color(0.7359404, 0.47677833, 0.36234355, 1)
+fog_density = 0.015
+
+[node name="TerrainManager" type="Node3D" unique_id=1387819765 node_paths=PackedStringArray("player")]
+script = ExtResource("1_icbd1")
+player = NodePath("mangas3p")
+
+[node name="mangas3p" parent="." unique_id=1479076587 instance=ExtResource("2_atpbs")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=579636448]
+transform = Transform3D(1, 0, 0, 0, 0.2268383, 0.97393245, 0, -0.97393245, 0.2268383, 0, 38.279755, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1763960021]
+environment = SubResource("Environment_atpbs")
