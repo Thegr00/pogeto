@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://cblalv8g1bs00"]
+
+[ext_resource type="Script" uid="uid://rdwfnwsfhojb" path="res://Main_Menu/main_menu.gd" id="1_jht8a"]
+[ext_resource type="Texture2D" uid="uid://dagq83ml1cngb" path="res://Screenshot 2024-09-03 015442.png" id="2_6qckm"]
+[ext_resource type="PackedScene" uid="uid://xyw0fj5xlm2h" path="res://Settings_Menu/settings_menu.tscn" id="3_6qckm"]
+[ext_resource type="AudioStream" uid="uid://bh8lwyk22rlde" path="res://Sam the Kid - Frio [NRyEwTc0uhE].mp3" id="4_2jvup"]
+
+<<<<<<< Updated upstream
+=======
+[sub_resource type="SystemFont" id="SystemFont_6qckm"]
+subpixel_positioning = 0
+
+>>>>>>> Stashed changes
+[sub_resource type="SystemFont" id="SystemFont_2jvup"]
+
+[node name="Main_Menu" type="Control" unique_id=173472075]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jht8a")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1309109483]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6qckm")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1332984598]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=260336106]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer" unique_id=184737541]
+layout_mode = 2
+
+[node name="Nome do jogo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=666131899]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Vida de Caipara"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=265428987]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1294954390]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1963426748]
+layout_mode = 2
+
+[node name="Start_button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=609159818]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Start"
+
+[node name="Seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1371682529]
+layout_mode = 2
+
+[node name="Opt_button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2084469445]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="Seperator4" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=746468945]
+layout_mode = 2
+
+[node name="Exit_button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=529854112]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_2jvup")
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+
+[node name="Settings_menu" parent="." unique_id=1906715036 instance=ExtResource("3_6qckm")]
+visible = false
+layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1826100463]
+stream = ExtResource("4_2jvup")
+volume_db = -14.0
+autoplay = true
