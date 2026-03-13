@@ -41,30 +41,12 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sound/MarginContainer" unique_id=1640062018]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Sound/MarginContainer" unique_id=1500928320]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Sound/MarginContainer/ScrollContainer" unique_id=532791360]
 layout_mode = 2
 theme_override_constants/separation = 64
-alignment = 1
-
-[node name="Label" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer" unique_id=303779601]
-layout_mode = 2
-text = "12345678"
-
-[node name="Label2" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer" unique_id=937111564]
-layout_mode = 2
-text = "12345678"
-
-[node name="Label3" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer" unique_id=439578207]
-layout_mode = 2
-text = "12345678"
-
-[node name="Label4" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer" unique_id=38644401]
-layout_mode = 2
-text = "12345678"
-
-[node name="Label5" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer" unique_id=93323087]
-layout_mode = 2
-text = "12345678"
 
 [node name="Graphics" type="TabBar" parent="TabContainer" unique_id=290439465]
 visible = false

@@ -3,7 +3,14 @@
 [ext_resource type="Script" uid="uid://rdwfnwsfhojb" path="res://Main_Menu/main_menu.gd" id="1_jht8a"]
 [ext_resource type="Texture2D" uid="uid://dagq83ml1cngb" path="res://Screenshot 2024-09-03 015442.png" id="2_6qckm"]
 [ext_resource type="PackedScene" uid="uid://xyw0fj5xlm2h" path="res://Settings_Menu/settings_menu.tscn" id="3_6qckm"]
+[ext_resource type="AudioStream" uid="uid://bh8lwyk22rlde" path="res://Sam the Kid - Frio [NRyEwTc0uhE].mp3" id="4_2jvup"]
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="SystemFont" id="SystemFont_6qckm"]
+subpixel_positioning = 0
+
+>>>>>>> Stashed changes
 [sub_resource type="SystemFont" id="SystemFont_2jvup"]
 
 [node name="Main_Menu" type="Control" unique_id=173472075]
@@ -90,3 +97,8 @@ text = "Exit"
 [node name="Settings_menu" parent="." unique_id=1906715036 instance=ExtResource("3_6qckm")]
 visible = false
 layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1826100463]
+stream = ExtResource("4_2jvup")
+volume_db = -14.0
+autoplay = true
