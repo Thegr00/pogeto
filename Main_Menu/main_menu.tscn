@@ -1,17 +1,14 @@
-[gd_scene format=3 uid="uid://up8rwgpj6eq7"]
+[gd_scene format=3 uid="uid://cws6kh5sfqysa"]
 
 [ext_resource type="Script" uid="uid://rdwfnwsfhojb" path="res://Main_Menu/main_menu.gd" id="1_jht8a"]
-[ext_resource type="Texture2D" uid="uid://dagq83ml1cngb" path="res://Screenshot 2024-09-03 015442.png" id="2_6qckm"]
+[ext_resource type="Texture2D" uid="uid://ba2yf0mkjrjhs" path="res://Welcome_to_the_amto.jpg" id="2_6qckm"]
 [ext_resource type="PackedScene" uid="uid://xyw0fj5xlm2h" path="res://Settings_Menu/settings_menu.tscn" id="3_6qckm"]
 [ext_resource type="AudioStream" uid="uid://bh8lwyk22rlde" path="res://Sam the Kid - Frio [NRyEwTc0uhE].mp3" id="4_2jvup"]
 
-<<<<<<< Updated upstream
-=======
 [sub_resource type="SystemFont" id="SystemFont_6qckm"]
-subpixel_positioning = 0
 
->>>>>>> Stashed changes
 [sub_resource type="SystemFont" id="SystemFont_2jvup"]
+subpixel_positioning = 0
 
 [node name="Main_Menu" type="Control" unique_id=173472075]
 layout_mode = 3
@@ -52,8 +49,9 @@ layout_mode = 2
 
 [node name="Nome do jogo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=666131899]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_6qckm")
 theme_override_font_sizes/font_size = 64
-text = "Vida de Caipara"
+text = "Vida de Caipira"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -98,7 +96,8 @@ text = "Exit"
 visible = false
 layout_mode = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1826100463]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1788642325]
 stream = ExtResource("4_2jvup")
 volume_db = -14.0
 autoplay = true
+bus = &"Music"
