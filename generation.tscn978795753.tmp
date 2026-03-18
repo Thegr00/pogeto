@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cda0ipr4dpwwg"]
+
+[ext_resource type="Script" uid="uid://c4ftytyjlco85" path="res://terrainchunk.gd" id="1_b4h4x"]
+[ext_resource type="PackedScene" uid="uid://co5w5k0vu1wm5" path="res://mangas_3p.tscn" id="2_mef0c"]
+[ext_resource type="Script" uid="uid://7tn672omjfe0" path="res://terrain_chunk.gd" id="3_mef0c"]
+[ext_resource type="Script" uid="uid://s8e02b2f2ow3" path="res://static_body_3d.gd" id="4_mef0c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mef0c"]
+
+[node name="World" type="Node3D" unique_id=1403739215]
+script = ExtResource("1_b4h4x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1934322523]
+transform = Transform3D(1, 0, 0, 0, 0.039905038, 0.9992035, 0, -0.9992035, 0.039905038, 0, 21.6314, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1249567055]
+
+[node name="mangas3p" parent="." unique_id=1479076587 instance=ExtResource("2_mef0c")]
+
+[node name="TerrainManager" type="Node3D" parent="." unique_id=1232252615]
+script = ExtResource("3_mef0c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TerrainManager" unique_id=222756877]
+script = ExtResource("4_mef0c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainManager/StaticBody3D" unique_id=354269804]
+shape = SubResource("BoxShape3D_mef0c")

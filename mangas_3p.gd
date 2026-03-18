@@ -50,24 +50,25 @@ func _physics_process(delta: float) -> void:
 	if current_speed < min_speed + 2: #SE POUCA VELOCIDADE CAIS UMA BECA (GRAVIDADE)
 		velocity += get_gravity() * delta
 func handle_flight_rotation(delta):
-	var pitch = Input.get_axis("back", "forward")     #VARIAVEL DE MOVIEMENTO CIMA-BAIXO (-1 A 1)
+	var pitch = Input.get_axis("back", "forward")  #VARIAVEL DE MOVIEMENTO CIMA-BAIXO (-1 A 1)
 	var roll = Input.get_axis("left", "right")     #IGUAL SOQ LADOS
-	rotate_object_local(Vector3.RIGHT, pitch * rotation_speed * delta)   #RODA DE ACORDO COM VALORES/PRESSES
-	rotate_object_local(Vector3.FORWARD, -roll * rotation_speed * delta)  #NOTA: DELTA= MANTEM A SPEED BOA INDEEPENDENTE DE FPS
-	rotation.x = clamp(rotation.x, deg_to_rad(-89), deg_to_rad(89))
-	var max_roll = deg_to_rad(90)
-	rotation.z = clamp(rotation.z, -max_roll, max_roll)
+	if pitch != 0:
+		transform.basis = transform.basis.rotated(transform.basis.x, pitch * rotation_speed * delta)
+	if roll != 0:
+		transform.basis = transform.basis.rotated(transform.basis.z, roll * rotation_speed * delta)
 	var bank_amount = transform.basis.x.y 
-	rotate_y(-bank_amount * delta * 3.0) 
+	transform.basis = transform.basis.rotated(Vector3.UP, -bank_amount * delta * 3.0)
 	if roll == 0:
-		var current_quat = transform.basis.get_rotation_quaternion()
-		var target_quat = transform.basis.orthonormalized().get_rotation_quaternion()
-		var interpolated_quat = current_quat.slerp(target_quat, delta * 1.5)
-		transform.basis = Basis(interpolated_quat)
-		rotation.z = lerp_angle(rotation.z, 0, delta * 2.0) #SE PARAR DE VIRAR FICA DIREITO
+		var target_up = Vector3.UP
+		var look_dir = -transform.basis.z
+		var right_dir = look_dir.cross(target_up).normalized()
+		var actual_up = right_dir.cross(look_dir).normalized()
+		var target_basis = Basis(right_dir, actual_up, -look_dir)
+		transform.basis = transform.basis.slerp(target_basis, delta * 1.5)
+		transform.basis = transform.basis.orthonormalized()
 	if mesh_container:
 		var target_tilt = -roll * deg_to_rad(20)
-		mesh_container.rotation.z = lerp_angle(mesh_container.rotation.z, target_tilt, delta * 5.0)
+		mesh_container.rotation.z = lerp_angle(mesh_container.rotation.z, target_tilt, delta * 5.0)	
 func calculate_flight_speed(delta):
 	var look_dir_y = -transform.basis.z.y 
 	if look_dir_y < 0: #DIVE

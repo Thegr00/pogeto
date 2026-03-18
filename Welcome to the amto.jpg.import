@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dagq83ml1cngb"
-path="res://.godot/imported/Screenshot 2024-09-03 015442.png-2811e6559bef48ee37e6e8c3f044da1b.ctex"
+uid="uid://di31kll7fls0k"
+path="res://.godot/imported/Welcome to the amto.jpg-dce728b625c5df4753b1109ec4e685dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Screenshot 2024-09-03 015442.png"
-dest_files=["res://.godot/imported/Screenshot 2024-09-03 015442.png-2811e6559bef48ee37e6e8c3f044da1b.ctex"]
+source_file="res://Welcome to the amto.jpg"
+dest_files=["res://.godot/imported/Welcome to the amto.jpg-dce728b625c5df4753b1109ec4e685dc.ctex"]
 
 [params]
 

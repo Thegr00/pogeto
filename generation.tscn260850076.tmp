@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://cda0ipr4dpwwg"]
+
+[ext_resource type="PackedScene" uid="uid://co5w5k0vu1wm5" path="res://mangas_3p.tscn" id="2_mef0c"]
+
+[sub_resource type="GDScript" id="GDScript_b4h4x"]
+script/source = "extends Node3D
+
+@export var player: Node3D
+@export var chunk_size: int = 64
+@export var render_distance: int = 4 # How many chunks in each direction
+@export var terrain_material: ShaderMaterial
+
+var chunks = {} # Dictionary to store active chunks {Vector2i: Chunk}
+var noise = FastNoiseLite.new()
+
+func _ready():
+	# Configure Noise for \"Superflight\" style jaggedness
+	noise.seed = randi()
+	noise.noise_type = FastNoiseLite.TYPE_PERLIN
+	noise.frequency = 0.015
+	noise.fractal_octaves = 4
+	
+	update_chunks()
+
+func _process(_delta):
+	if player:
+		update_chunks()
+
+func update_chunks():
+	if not player: return # Safety check
+	
+	var p_pos = player.global_position
+	var p_chunk = Vector2i(floor(p_pos.x / chunk_size), floor(p_pos.z / chunk_size))
+	
+	var needed_chunks = []
+	for x in range(-render_distance, render_distance):
+		for z in range(-render_distance, render_distance):
+			needed_chunks.append(p_chunk + Vector2i(x, z))
+			
+	# Remove old chunks safely
+	for coord in chunks.keys():
+		if coord not in needed_chunks:
+			var chunk_to_kill = chunks[coord]
+			chunks.erase(coord)
+			chunk_to_kill.queue_free() # queue_free is safer than remove_child
+			
+	# Spawn new chunks
+	for coord in needed_chunks:
+		if not chunks.has(coord):
+			create_chunk(coord)
+
+func create_chunk(coord: Vector2i):
+	# Ensure we aren't creating a duplicate
+	if chunks.has(coord): return
+	
+	var chunk = MeshInstance3D.new()
+	chunk.set_script(load(\"res://terrain_chunk.gd\")) 
+	
+	# Add to dictionary FIRST to prevent race conditions
+	chunks[coord] = chunk
+	add_child(chunk)
+ 
+	# Initialize after adding to tree
+	chunk.setup(coord, chunk_size, noise, terrain_material)
+"
+
+[sub_resource type="GDScript" id="GDScript_wlfn8"]
+script/source = "class_name TerrainChunk
+extends MeshInstance3D
+
+var coord: Vector2i
+var chunk_size: int
+var noise: FastNoiseLite
+
+func setup(_coord: Vector2i, _size: int, _noise: FastNoiseLite, _mat: Material):
+	self.coord = _coord
+	self.chunk_size = _size
+	self.noise = _noise
+	self.material_override = _mat
+	self.position = Vector3(coord.x * chunk_size, 0, coord.y * chunk_size)
+	generate_mesh()
+
+func generate_mesh():
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	# Resolution of the mesh (lower = more low-poly/performant)
+	var res = 2 
+	
+	for x in range(0, chunk_size + res, res):
+		for z in range(0, chunk_size + res, res):
+			# Get world position for noise sampling
+			var wx = (coord.x * chunk_size) + x
+			var wz = (coord.y * chunk_size) + z
+			
+			# Generate multiple \"layers\" of terrain
+			create_vert_stack(st, x, z, wx, wz, res)
+
+	st.generate_normals()
+	self.mesh = st.commit()
+	create_trimesh_collision() # Required for the player to crash!
+
+func create_vert_stack(st, x, z, wx, wz, res):
+	# Base terrain height
+	var n = noise.get_noise_2d(wx, wz)
+	var base_h = n * 150.0 # Vertical scale
+	
+	# Create a \"Top\" and \"Bottom\" for arches
+	# If noise is in a certain range, we create a gap (the pass-through)
+	var hole_noise = noise.get_noise_2d(wx + 500, wz + 500)
+	
+	if hole_noise > 0.3: # This creates \"Floating\" sections
+		add_quad(st, x, z, base_h + 40, res) # The Arch ceiling
+		add_quad(st, x, z, base_h, res)      # The Floor
+	else:
+		add_quad(st, x, z, base_h, res)      # Standard Pillar
+
+func add_quad(st, x, z, h, res):
+	# Simple Plane Generation logic for the SurfaceTool
+	var v1 = Vector3(x, h, z)
+	var v2 = Vector3(x + res, h, z)
+	var v3 = Vector3(x, h, z + res)
+	var v4 = Vector3(x + res, h, z + res)
+	
+	# Triangle 1
+	st.add_vertex(v1)
+	st.add_vertex(v2)
+	st.add_vertex(v3)
+	# Triangle 2
+	st.add_vertex(v2)
+	st.add_vertex(v4)
+	st.add_vertex(v3)
+"
+
+[node name="world" type="Node3D" unique_id=1403739215]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1934322523]
+transform = Transform3D(1, 0, 0, 0, 0.039905038, 0.9992035, 0, -0.9992035, 0.039905038, 0, 21.6314, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1249567055]
+
+[node name="TerrainManager" type="Node3D" parent="." unique_id=1468041575 node_paths=PackedStringArray("player")]
+script = SubResource("GDScript_b4h4x")
+player = NodePath("../mangas3p")
+
+[node name="TerrainChunk" type="MeshInstance3D" parent="TerrainManager" unique_id=110757940]
+script = SubResource("GDScript_wlfn8")
+
+[node name="mangas3p" parent="." unique_id=1479076587 instance=ExtResource("2_mef0c")]
