@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cbhpfslu88plv"]
+
+[ext_resource type="Script" uid="uid://c1rfcyuvjkfuv" path="res://Generation/scripts/terrain_chunk.gd" id="1_mb83e"]
+
+[node name="TerrainChunk" type="Node3D" unique_id=170260594]
+script = ExtResource("1_mb83e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1561225606]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1812393316]
