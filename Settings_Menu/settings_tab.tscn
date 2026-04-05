@@ -3,6 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://d153fi1vs6ers" path="res://Settings_Menu/audio_slider_settings.tscn" id="1_2501t"]
 [ext_resource type="PackedScene" uid="uid://dtt4e1datbjfe" path="res://Settings_Menu/window_mode_button.tscn" id="1_kyc7v"]
 [ext_resource type="PackedScene" uid="uid://dh78vle5t7wmq" path="res://Settings_Menu/resolution_mode_button.tscn" id="2_0fns4"]
+[ext_resource type="PackedScene" uid="uid://rdn70to3j1wr" path="res://Settings_Menu/hotkey_rebind_button.tscn" id="4_ibw2n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ordoa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6o82o"]
 
 [node name="Settings_tab" type="Control" unique_id=2099272288]
 layout_mode = 3
@@ -24,9 +29,10 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Sound" type="TabBar" parent="TabContainer" unique_id=1803200295]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -91,7 +97,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Controls" type="TabBar" parent="TabContainer" unique_id=84577468]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -107,30 +112,47 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer" unique_id=943693458]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controls/MarginContainer" unique_id=222407121]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer" unique_id=544632652]
 layout_mode = 2
 theme_override_constants/separation = 64
-alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer" unique_id=204387366]
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1723490602]
 layout_mode = 2
-text = "12345678"
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ordoa")
 
-[node name="Label2" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer" unique_id=947079074]
+[node name="Hotkey_rebind_button" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=930287339 instance=ExtResource("4_ibw2n")]
 layout_mode = 2
-text = "12345678"
 
-[node name="Label3" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer" unique_id=472928694]
+[node name="Hotkey_rebind_button2" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=598848313 instance=ExtResource("4_ibw2n")]
 layout_mode = 2
-text = "12345678"
+action_name = "left"
 
-[node name="Label4" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer" unique_id=201017965]
+[node name="Hotkey_rebind_button3" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1723257678 instance=ExtResource("4_ibw2n")]
 layout_mode = 2
-text = "12345678"
 
-[node name="Label5" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer" unique_id=1784447965]
+[node name="Hotkey_rebind_button4" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2072879334 instance=ExtResource("4_ibw2n")]
 layout_mode = 2
-text = "12345678"
+
+[node name="Hotkey_rebind_button5" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1792691438 instance=ExtResource("4_ibw2n")]
+layout_mode = 2
+
+[node name="Hotkey_rebind_button6" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2082102350 instance=ExtResource("4_ibw2n")]
+layout_mode = 2
+
+[node name="Hotkey_rebind_button7" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1806586461 instance=ExtResource("4_ibw2n")]
+layout_mode = 2
+
+[node name="Hotkey_rebind_button8" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=909264561 instance=ExtResource("4_ibw2n")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1144129985]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6o82o")
 
 [node name="Accessibility" type="TabBar" parent="TabContainer" unique_id=49925622]
 visible = false
